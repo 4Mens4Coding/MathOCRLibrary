@@ -2,26 +2,22 @@ import os
 from xlwt import Workbook, easyxf
 from traceback import format_exc
 
-# Create and format an excel workbook
-wb = Workbook ()
-sheet_Notes = wb.add_sheet ("DataForTraining")
-
 fontList = ["Agency FB", "Aharoni", "Aldhabi", "Algerian", "Almanac MT", "American Uncial", "Andale Mono", "Andalus", "Andy", "AngsanaUPC",
             "Angsana New", "Aparajita", "Arabic Transparent", "Arabic Typesetting", "Arial", "Arial Black", "Arial Narrow", "Arial Narrow Special",
             "Arial Rounded MT", "Arial Special", "Arial Unicode MS", "Augsburger Initials", "Baskerville Old Face", "Batang", "BatangChe", "Bauhaus 93",
             "Beesknees ITC", "Bell MT", "Berlin Sans FB", "Bernard MT Condensed", "Bickley Script", "Blackadder ITC", "Bodoni MT", "Bodoni MT Condensed",
             "Bon Apetit MT", "Bookman Old Style", "Bookshelf Symbol", "Book Antiqua", "Bradley Hand ITC", "Braggadocio", "BriemScript", "Britannic Bold",
-            "Britannic Bold", "Broadway", "BrowalliaUPC", "Browallia New", "Brush Script MT", "Calibri", "Californian FB", "Calisto MT", "Cambria",
+            "Britannic Bold", "BrowalliaUPC", "Browallia New", "Brush Script MT", "Calibri", "Californian FB", "Calisto MT", "Cambria",
             "Candara", "Cariadings", "Castellar", "Centaur", "Century", "Century Gothic", "Century Schoolbook", "Chiller", "Colonna MT",
             "Comic Sans MS", "Consolas", "Constantia", "Contemporary Brush", "Cooper Black", "Copperplate Gothic", "Corbel", "CordiaUPC", "Cordia New",
-            "Courier New", "Curlz MT", "DaunPenh", "David", "Desdemona", "DFKai-SB", "DilleniaUPC", "Directions MT", "DokChampa", "Dotum", "DotumChe",
-            "Ebrima", "Eckmann", "Edda", "Edwardian Script ITC", "Elephant", "Engravers MT", "Enviro", "Eras ITC", "Estrangelo Edessa", "EucrosiaUPC",
+            "Courier New", "DaunPenh", "David", "Desdemona", "DFKai-SB", "DilleniaUPC", "Directions MT", "DokChampa", "Dotum", "DotumChe",
+            "Ebrima", "Eckmann", "Edda", "Elephant", "Engravers MT", "Enviro", "Eras ITC", "Estrangelo Edessa", "EucrosiaUPC",
             "Euphemia", "Eurostile", "FangSong", "Felix Titling", "Fine Hand", "Fixed Miriam Transparent", "Flexure", "Footlight MT", "Forte",
             "Franklin Gothic", "Franklin Gothic Medium", "FrankRuehl", "FreesiaUPC", "Freestyle Script", "French Script MT", "Futura", "Gabriola",
-            "Gadugi", "Garamond", "Garamond MT", "Gautami", "Georgia", "Georgia Ref", "Gigi", "Gill Sans MT", "Gill Sans MT Condensed", "Gisha",
-            "Gloucester", "Goudy Old Style", "Goudy Stout", "Gradl", "Gulim", "GulimChe", "Gungsuh", "GungsuhChe", "Haettenschweiler", "Harlow Solid Italic",
+            "Gadugi", "Garamond", "Garamond MT", "Gautami", "Georgia", "Georgia Ref", "Gill Sans MT", "Gill Sans MT Condensed", "Gisha",
+            "Gloucester", "Goudy Old Style", "Gradl", "Gulim", "GulimChe", "Gungsuh", "GungsuhChe", "Haettenschweiler", "Harlow Solid Italic",
             "Harrington", "High Tower Text", "Holidays MT", "Impact", "Imprint MT Shadow", "Informal Roman", "IrisUPC", "Iskoola Pota", "JasmineUPC",
-            "Jokerman", "Juice ITC", "KaiTi", "Kalinga", "Kartika", "Keystrokes MT", "Khmer UI", "Kino MT", "KodchiangUPC", "Kokila", "Kristen ITC",
+            "Juice ITC", "KaiTi", "Kalinga", "Kartika", "Keystrokes MT", "Khmer UI", "Kino MT", "KodchiangUPC", "Kokila", "Kristen ITC",
             "Kunstler Script", "Lao UI", "Latha", "LCD", "Leelawadee", "Levenim MT", "LilyUPC", "Lucida Blackletter", "Lucida Bright", "Lucida Bright Math",
             "Lucida Calligraphy", "Lucida Console", "Lucida Fax", "Lucida Handwriting", "Lucida Sans", "Lucida Sans Typewriter", "Lucida Sans Unicode",
             "Magneto", "Maiandra GD", "Malgun Gothic", "Mangal", "Map Symbols", "Matisse ITC", "Matura MT Script Capitals", "McZee", "Mead Bold",
@@ -39,30 +35,53 @@ fontList = ["Agency FB", "Aharoni", "Aldhabi", "Algerian", "Almanac MT", "Americ
             "Traditional Arabic", "Transport MT", "Trebuchet MS", "Tunga", "Tw Cen MT", "Tw Cen MT Condensed", "Urdu Typesetting", "Utsaah", "Vacation MT", "Vani", "Verdana",
             "Verdana Ref", "Vijaya", "Viner Hand ITC", "Vivaldi", "Vixar ASCI", "Vladimir Script", "Vrinda", "Westminster"]
 
-symbolList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "*", "=", ",", ".", "(", ")", "[", "]", "{", "}"]
+symbolList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "*", "=", ",", ".", "(", ")", "[", "]", "{", "}", "<", ">", "%", "^", "~", "!"]
 
-for i in range (0, len (symbolList)):
-        sheet_Notes.col (i).width_mismatch = True
-        sheet_Notes.col (i).width = 256*10
 
-for i in range (0, len (fontList)):
-        sheet_Notes.row (i).height_mismatch = True
-        sheet_Notes.row (i).height = 256*5
+def printSymbolsAndSaveFile (workbook, sheet, fileName, fontType = ""):
+	for i in range (0, len (symbolList)):
+		sheet.col (i).width_mismatch = True
+		sheet.col (i).width = 256*16
 
-# Fill all excel with symbols	
-line = 0
-for font in fontList:
-        font_style = easyxf ("font: name " + font + ", height 1200")
-        col = 0
-        for symb in symbolList:
-                sheet_Notes.write (line, col, symb, font_style)
-                col += 1
-        line += 1 
+	for i in range (0, len (fontList)):
+		sheet.row (i).height_mismatch = True
+		sheet.row (i).height = 256*7
 
-# Save excel file
-try:
-        wb.save ("DataForTraining.xls")
-        print ("File successfully created")
-except:
-        print ("File is not created")
-        print (format_exc ())
+	# Fill all excel with regular font symbols	
+	line = 0
+	for font in fontList:
+		font_style = easyxf ("font: name " + font + ", " + fontType + "height 1200; align: horiz center, vert center")
+		col = 0
+		for symb in symbolList:
+			sheet.write (line, col, symb, font_style)
+			col += 1
+		line += 1 
+
+	# Save excel file
+	try:
+		workbook.save (fileName)
+		print (fileName + " was successfully created")
+	except:
+		print ("File is not created")
+		print (format_exc ())
+
+
+# Create and format an excel workbook for regular font
+wbRegular = Workbook ()
+regularFontSheet = wbRegular.add_sheet ("RegularFont")
+printSymbolsAndSaveFile (wbRegular, regularFontSheet, "RegularFontSymbols.xls")
+
+# Create and format an excel workbook for bold font
+wbBold = Workbook ()
+boldFontSheet = wbBold.add_sheet ("BoldFont")
+printSymbolsAndSaveFile (wbBold, boldFontSheet, "BoldFontSymbols.xls", "bold 1, ")
+
+# Create and format an excel workbook for italic font
+wbItalic = Workbook ()
+italicFontSheet = wbItalic.add_sheet ("ItalicFont")
+printSymbolsAndSaveFile (wbItalic, italicFontSheet, "ItalicFontSymbols.xls", "italic 1, ")
+
+# Create and format an excel workbook for bold italic font
+wbBoldItalic = Workbook ()
+boldItalicFontSheet = wbBoldItalic.add_sheet ("BoldItalicFont")
+printSymbolsAndSaveFile (wbBoldItalic, boldItalicFontSheet, "BoldItalicFontSymbols.xls", "italic 1, bold 1, ")
