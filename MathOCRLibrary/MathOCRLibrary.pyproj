@@ -22,9 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataGenerator\DataGenerator.py" />
-    <Compile Include="DataGenerator\GetImageFromExcel.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="main.py" />
   </ItemGroup>
   <ItemGroup>
