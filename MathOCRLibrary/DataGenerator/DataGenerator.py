@@ -74,15 +74,14 @@ def getImageFromCell (fileName):
     xls.Visible = 0
     xlswb = xls.Workbooks.Open (os.path.join (directory, fileName), ReadOnly = True)
     excelFile = xlswb.Sheets (fileName[:-4])
-    for i in range (0, len (symbolList)):
+    for i in range (1, len (symbolList) + 1):
         location = createAFolder (os.path.join (directory, "TrainingData"), str (i))
         for j in range (1, len (fontList) + 1):
-            _range = "{0}{1}".format (chr (65 + i), j)
-            print (_range)
+            print ("{0}: {1}, {2}".format (fileName[:-4], i, j))
             try:
-                rng = excelFile.Application.Range (_range)
+                rng = excelFile.Application.Cells (i, j)
             except com_error:
-                raise Exception ("Failed locating range %s" % (_range))
+                raise Exception ("Failed locating in excel")
         
             # See http://stackoverflow.com/a/42465354/1924207
             for shape in rng.parent.Shapes: pass
