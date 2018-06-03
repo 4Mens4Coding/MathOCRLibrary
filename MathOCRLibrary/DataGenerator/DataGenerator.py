@@ -79,7 +79,7 @@ def getImageFromCell (fileName):
         for j in range (1, len (fontList) + 1):
             print ("{0}: {1}, {2}".format (fileName[:-4], i, j))
             try:
-                rng = excelFile.Application.Cells (i, j)
+                rng = excelFile.Application.Cells (j, i)
             except com_error:
                 raise Exception ("Failed locating in excel")
         
