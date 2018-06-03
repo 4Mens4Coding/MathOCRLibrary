@@ -93,7 +93,7 @@ def getImageFromCell (fileName):
                 try:
                     rng.CopyPicture (1, 2)
                     im = ImageGrab.grabclipboard ()
-                    path = os.path.join (location, str (symbolList[i]) + str (j) + fileName[:-4] + ".PNG")
+                    path = os.path.join (location, str (j) + fileName[:-4] + ".PNG")
                     im.save (path, "PNG")
                     success = True
                 except (com_error, AttributeError) as e:
