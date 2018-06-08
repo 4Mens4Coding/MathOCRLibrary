@@ -1,8 +1,0 @@
-configuration: Release
-
-image: Visual Studio 2017
- 
- environment:
-    - PYTHON: "C:\Python36-x64"
-      PYTHON_VERSION: "3.6.5"
-      PYTHON_ARCH: "64"
