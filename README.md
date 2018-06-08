@@ -1,3 +1,5 @@
+https://semaphoreci.com/api/v1/valentk777/mathocrlibrary/branches/continues-integration/badge.svg
+
 # MathOCRLibrary
 
 Training data:
