@@ -11,11 +11,7 @@ VERSION = "1.0"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    # 'requests', 'maya', 'records',
-]
-
-OPTIONAL = [
-    "xlwt==1.3.0"
+    "xlwt==1.3.0"# 'requests', 'maya', 'records',
 ]
 
 # Load the package's __version__.py module as a dictionary.
@@ -36,6 +32,5 @@ setup(
     url = URL,
     packages = find_packages(),
     install_requires = REQUIRED,
-    extras_require = OPTIONAL,
     classifiers = ["Programming Language :: Python :: 3.6"]
 )
