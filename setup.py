@@ -8,5 +8,5 @@ setup(
     author_email = "valentk777@gmail.com",
     description = "Description of my package",
     packages = find_packages(),    
-    install_requires = ['numpy >= 1.11.1', 'matplotlib >= 1.5.1'],
+    # install_requires = ['numpy >= 1.11.1', 'matplotlib >= 1.5.1'],
 )
