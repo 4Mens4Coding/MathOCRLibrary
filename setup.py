@@ -15,7 +15,7 @@ REQUIRED = [
 ]
 
 OPTIONAL = [
-    "xlwt"
+    "xlwt==1.3.0"
 ]
 
 # Load the package's __version__.py module as a dictionary.
