@@ -14,6 +14,10 @@ REQUIRED = [
     # 'requests', 'maya', 'records',
 ]
 
+OPTIONAL = [
+    xlwt
+]
+
 # Load the package's __version__.py module as a dictionary.
 about = {}
 if not VERSION:
@@ -26,7 +30,6 @@ setup(
     name = NAME,
     version = about['__version__'],
     description = DESCRIPTION,
-    long_description = long_description,
     long_description_content_type = "text/markdown",
     author = AUTHOR,
     author_email = EMAIL,
@@ -34,6 +37,6 @@ setup(
     url = URL,
     packages = find_packages(),
     install_requires = REQUIRED,
-    # install_requires = ['numpy >= 1.11.1', 'matplotlib >= 1.5.1'],
+    extras_require = OPTIONAL,
     classifiers = ["Programming Language :: Python :: 3.6"]
 )
