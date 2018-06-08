@@ -1,1 +1,1 @@
-xlwt
+# write only package name which should be installed before testing (to build project successfully)
