@@ -5,7 +5,6 @@ from win32com.client import Dispatch
 from PIL import ImageGrab # to make a shortcut in excel
 from pywintypes import com_error
 
-
 directory = os.path.dirname (os.path.abspath (__file__))
 
 def getListFromFile (fileName):
@@ -102,20 +101,28 @@ def getImageFromCell (fileName):
                     if retries == 0: raise
     xlswb.Close (True)
 
+
+def main ():
+    """ Des: main function in file
+        Inf: Valentinas                                 6/9/2018 """
+    # Create and format an excel workbook for regular font
+    createAndSaveSheetInExcel ("RegularFont.xls")
+    # Create and format an excel workbook for bold font
+    createAndSaveSheetInExcel ("BoldFont.xls", "bold 1")
+    # Create and format an excel workbook for italic font
+    createAndSaveSheetInExcel ("ItalicFont.xls", "italic 1")
+    # Create and format an excel workbook for bold italic font
+    createAndSaveSheetInExcel ("ItalicAndBoldFont.xls", "bold 1", "italic 1")
+
+    # create images from created excel files
+    getImageFromCell ("RegularFont.xls")
+    getImageFromCell ("BoldFont.xls")
+    getImageFromCell ("ItalicFont.xls")
+    getImageFromCell ("ItalicAndBoldFont.xls")
+
+
 fontList = getListFromFile ("Fonts.txt")
 symbolList = getListFromFile ("Symbols.txt")
 
-# Create and format an excel workbook for regular font
-createAndSaveSheetInExcel ("RegularFont.xls")
-# Create and format an excel workbook for bold font
-createAndSaveSheetInExcel ("BoldFont.xls", "bold 1")
-# Create and format an excel workbook for italic font
-createAndSaveSheetInExcel ("ItalicFont.xls", "italic 1")
-# Create and format an excel workbook for bold italic font
-createAndSaveSheetInExcel ("ItalicAndBoldFont.xls", "bold 1", "italic 1")
-
-# create images from created excel files
-getImageFromCell ("RegularFont.xls")
-getImageFromCell ("BoldFont.xls")
-getImageFromCell ("ItalicFont.xls")
-getImageFromCell ("ItalicAndBoldFont.xls")
+if __name__ == "__main__":
+    main ()
