@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>62532612-3ce5-4c71-995c-e1fdd4ba4d22</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>Unit_test\test_ImageProcessing.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,22 +21,31 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataGenerator\DataGenerator.py" />
-    <Compile Include="ImageProcessing\ImageProcessing.py">
+    <Compile Include="Program\DataGenerator\DataGenerator.py" />
+    <Compile Include="Program\ImageProcessing\ImageProcessing.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImageProcessing\__init__.py">
+    <Compile Include="Program\ImageProcessing\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="main.py" />
+    <Compile Include="Program\main.py" />
+    <Compile Include="Program\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Unit_test\test_ImageProcessing.py" />
+    <Compile Include="Unit_test\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataGenerator\" />
-    <Folder Include="ImageProcessing\" />
+    <Folder Include="Program\DataGenerator\" />
+    <Folder Include="Program\ImageProcessing\" />
+    <Folder Include="Program\" />
+    <Folder Include="Unit_test\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataGenerator\Fonts.txt" />
-    <Content Include="DataGenerator\Symbols.txt" />
+    <Content Include="Program\DataGenerator\Fonts.txt" />
+    <Content Include="Program\DataGenerator\Symbols.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
