@@ -1,8 +1,6 @@
+[![Build Status](https://semaphoreci.com/api/v1/valentk777/mathocrlibrary/branches/continuousintegration/badge.svg)](https://semaphoreci.com/valentk777/mathocrlibrary)
+
 # MathOCRLibrary
 
 Training data:
 https://drive.google.com/open?id=1z5PYRuOSWaWSe1hWqSm7xFjqzgGWNSld
-
-CommentTemplate:
-""" Des: Decription
-    Inf: Author                        last_modification_time """
