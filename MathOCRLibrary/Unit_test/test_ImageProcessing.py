@@ -6,7 +6,7 @@ from traceback import format_exc
 from Program.ImageProcessing import ImageController as IC
 
 imContr = IC ()
-imageDataPath = os.path.join (os.path.dirname (__file__), r"UnitTest_TestData\\Data_ImageProcessing.PNG")
+imageDataPath = os.path.join (os.path.dirname (__file__), "UnitTest_TestData/Data_ImageProcessing.PNG")
 
 #@pytest.fixture(scope="module")
 #def imContr():
