@@ -1,5 +1,6 @@
 from PIL import Image
 from queue import Queue
+from traceback import format_exc
 
 class ImageController:
     """ Des: Image processing class
@@ -17,8 +18,11 @@ class ImageController:
 
     def appendImageFromPath (self, imagePath):
         """ Add image to the __imageList from path """
-        with Image.open (imagePath, 'r') as image:
-            self.__imageList.put (image.copy ())
+        try:
+            with Image.open (imagePath, 'r') as image:
+                self.__imageList.put (image.copy ())
+        except:
+            raise format_exc ()
     
 
     def firstToBinaryArray (self):
@@ -53,29 +57,37 @@ class ImageController:
     
     def getBinaryArray (self, index):
         """ Return binary array in selected location (index) """
-        if (index > len (self.__binaryArrayList)):
-            assert "index is bigger then array"
-            return
-        return self.__binaryArrayList[index]
+        if ((index <= len (self.__binaryArrayList)) & (index > -1)):
+            return self.__binaryArrayList[index]
 
 
-    def cleanBinaryArray (self):
+    def cleanBinaryArrayList (self):
         """ Remove all stored binary arrays from the list """
-        self.__binaryArrayList = []
+        del self.__binaryArrayList[:]
 
 
-    def printAllBinaryArrayAsMatrix (self):
+    def printAllBinaryArraysAsMatrix (self):
         """ Print all binary arrays in the list with matrix shape """
         for binArr in self.__binaryArrayList:
-            print ("\n".join ("".join (map (str, line)) for line in binArr))
+            print (self.getBinaryArrayAsMatrix (binArr))
 
 
-    def printBinaryAsMatrix (self, BinaryArray):
-        """ Print one selected binary array with matrix shape """
-        print ("\n".join ("".join (map (str, line)) for line in BinaryArray))
+    def getBinaryArrayAsMatrix (self, BinaryArray):
+        """ return one selected binary array with matrix shape """
+        return "\n".join ("".join (map (str, line)) for line in BinaryArray)
+
+
+    def countOfImagesInQueue (self):
+        """ Number of pictures added to queue """
+        return self.__imageList.qsize ()
+
+
+    def countOfBinarizedImages (self):
+        """ Number of binarized pictures """
+        return len (self.__binaryArrayList)
 
 
     def __str__ (self):
         """ Print information about image controller """
-        return """Images: {0}\n ConvertedToBinaryArray: {1}\n Pending: {2}""".format (self.__imageList.qsize (), 
-            len (self.__binaryArrayList), self.__imageList.qsize () - len (self.__binaryArrayList))
+        return """ - Images: {0}\n - ConvertedToBinaryArray: {1}\n - Pending: {2}\n - Threshold: {3}\n""".format (self.__imageList.qsize (), 
+            len (self.__binaryArrayList), self.__imageList.qsize () - len (self.__binaryArrayList), self.threshold)

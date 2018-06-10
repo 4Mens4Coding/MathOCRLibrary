@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>62532612-3ce5-4c71-995c-e1fdd4ba4d22</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Unit_test\test_ImageProcessing.py</StartupFile>
+    <StartupFile>Unit_test\mainTest.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -30,6 +30,9 @@
     </Compile>
     <Compile Include="Program\main.py" />
     <Compile Include="Program\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Unit_test\mainTest.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Unit_test\test_ImageProcessing.py" />
