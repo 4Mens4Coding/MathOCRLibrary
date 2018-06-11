@@ -1,0 +1,10 @@
+[
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_appendImageFromPath_countOfImagesInQueue",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_firstToBinaryArray",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_printImageController",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_printAllBinaryArraysAsMatrix",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_getBinaryArray_outOfRange",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_allToBinaryArray",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_getBinaryArrayAsMatrix",
+  "UnitTests/test_ImageProcessing.py::TestClass_ImageProcessing::()::test_cleanBinaryArrayList"
+]
