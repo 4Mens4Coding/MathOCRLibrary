@@ -25,6 +25,8 @@ bld/
 
 # UnitTest result
 .pytest_cache/
+pytest_cache/
+pytest-logs.txt
 
 # Training data
 TrainingData/
