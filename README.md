@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/valentk777/mathocrlibrary/branches/continuousintegration/badge.svg)](https://semaphoreci.com/valentk777/mathocrlibrary)
+[![Build Status](https://semaphoreci.com/api/v1/valentk777/mathocrlibrary/branches/master/badge.svg)](https://semaphoreci.com/valentk777/mathocrlibrary)
 
 # MathOCRLibrary
 
