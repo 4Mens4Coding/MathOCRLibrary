@@ -4,6 +4,7 @@ from traceback import format_exc
 from win32com.client import Dispatch
 from PIL import ImageGrab # to make a shortcut in excel
 from pywintypes import com_error
+from collections import defaultdict
 
 directory = os.path.dirname (os.path.abspath (__file__))
 
@@ -11,13 +12,24 @@ def getListFromFile (fileName):
     """ Des: Function to create a list of lines in file
         Inf: Valentinas                                 6/2/2018 """
     with open (os.path.join (directory, fileName), "r") as f:
-        return [line for line in f.read ().splitlines ()]
+        return [str (line) for line in f.read ().splitlines ()]
             
+
+def getDictFromFile (fileName):
+    """ Des: Function to create a dictionary from lines in file
+        Inf: Valentinas                                 6/16/2018 """
+    dict = defaultdict (list)
+    with open (os.path.join (directory, fileName), "r") as f:
+        for line in f:
+            (key, val) = line.split ()
+            dict[key] = val
+        return dict
+    
 
 def printSymbolsToExcel (sheet, fontType = ""):
     """ Des: Fill excel sheet with symbols and all different fonts
         Inf: Valentinas, Deividas                        6/2/2018 """
-    for i in range (0, len (symbolList)):
+    for i in range (0, len (symbolsDict)):
         sheet.col (i).width_mismatch = True
         sheet.col (i).width = 256 * 16
 
@@ -28,11 +40,11 @@ def printSymbolsToExcel (sheet, fontType = ""):
     # Fill all excel with regular font symbols
     line = 0
     for font in fontList:
-        formatLine = ", ".join (["font: name " + font, fontType, "height 1200; align: horiz center", "vert center"])
+        formatLine = ", ".join (["font: name " + str (font), fontType, "height 1200; align: horiz center", "vert center"])
         fontStyle = easyxf (formatLine)
         col = 0
-        for symb in symbolList:
-            sheet.write (line, col, symb, fontStyle)
+        for key in symbolsDict:
+            sheet.write (line, col, key, fontStyle)
             col += 1
         line += 1 
 
@@ -73,8 +85,9 @@ def getImageFromCell (fileName):
     xls.Visible = 0
     xlswb = xls.Workbooks.Open (os.path.join (directory, fileName), ReadOnly = True)
     excelFile = xlswb.Sheets (fileName[:-4])
-    for i in range (1, len (symbolList) + 1):
-        location = createAFolder (os.path.join (directory, "TrainingData"), str (i))
+    dictList = list (symbolsDict)
+    for i in range (1, len (symbolsDict) + 1):
+        location = createAFolder (os.path.join (directory, "TrainingData"), str (symbolsDict[dictList[i]]))
         for j in range (1, len (fontList) + 1):
             print ("{0}: {1}, {2}".format (fileName[:-4], i, j))
             try:
@@ -122,7 +135,8 @@ def main ():
 
 
 fontList = getListFromFile ("Fonts.txt")
-symbolList = getListFromFile ("Symbols.txt")
+symbolsDict = getDictFromFile ("Symbols.txt")
+
 
 if __name__ == "__main__":
     main ()
