@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>62532612-3ce5-4c71-995c-e1fdd4ba4d22</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>DataGenerator\DataGenerator.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataGenerator\DataGenerator.py" />
+    <Compile Include="ImageProcessing\DataController.py" />
     <Compile Include="ImageProcessing\ImageProcessing.py">
       <SubType>Code</SubType>
     </Compile>

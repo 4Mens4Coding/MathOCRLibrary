@@ -70,6 +70,7 @@ class ImageController:
         """ Print all binary arrays in the list with matrix shape """
         for binArr in self.__binaryArrayList:
             print (self.getBinaryArrayAsMatrix (binArr))
+            print ("-----------------------------------")
 
 
     def getBinaryArrayAsMatrix (self, BinaryArray):
