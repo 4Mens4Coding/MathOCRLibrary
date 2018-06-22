@@ -7,11 +7,12 @@ from PIL import Image
 def main ():
     """ Des: This is our main program
         Inf: Author                        last_modification_time """
-    ImController = ImageController ()
-    trainingDataLocation = iglob ("*/TrainingData/1/*.png")
+    ImController = ImageController (400)
+    trainingDataLocation = iglob ("*/TrainingData/test/*.jpg")
     for imagePath in trainingDataLocation:
         ImController.appendImageFromPath (imagePath)
     ImController.allToBinaryArray ()
+    ImController.getAllBinaryArrays
     ImController.printAllBinaryArraysAsMatrix ()
     ImController.cleanBinaryArrayList ()
 

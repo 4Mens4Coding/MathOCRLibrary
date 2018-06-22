@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataGenerator\DataGenerator.py" />
+    <Compile Include="ImageProcessing\DataController.py" />
     <Compile Include="ImageProcessing\ImageProcessing.py">
       <SubType>Code</SubType>
     </Compile>
