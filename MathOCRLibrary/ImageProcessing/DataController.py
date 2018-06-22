@@ -2,7 +2,7 @@ from ImageProcessing import ImageController
 import MySQLdb as mdb
  
 try:
-  con = mdb.connect('176.223.133.57','valentk777','fbauisdvgasidugvalsduigas','MathOCR');
+  con = mdb.connect('server_ip','user','password','database');
   cur = con.cursor()
   ic = ImageController() 
   ic.appendImageFromPath("/home/MathOCR/MathOCRLibrary/ImageProcessing/6")
