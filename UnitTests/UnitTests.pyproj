@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>62532612-3ce5-4c71-995c-e1fdd4ba4d22</ProjectGuid>
+    <ProjectGuid>1bd050be-fdf2-436d-9340-19f4938563a4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>mainTest.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>MathOCRLibrary</Name>
-    <RootNamespace>MathOCRLibrary</RootNamespace>
+    <Name>UnitTests</Name>
+    <RootNamespace>UnitTests</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,26 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataGenerator\DataGenerator.py" />
-    <Compile Include="ImageProcessing\DataController.py" />
-    <Compile Include="ImageProcessing\ImageProcessing.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ImageProcessing\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="main.py" />
-    <Compile Include="__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataGenerator\" />
-    <Folder Include="ImageProcessing\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DataGenerator\Fonts.txt" />
-    <Content Include="DataGenerator\Symbols.txt" />
+    <Compile Include="mainTest.py" />
+    <Compile Include="test_ImageProcessing.py" />
+    <Compile Include="__init__.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

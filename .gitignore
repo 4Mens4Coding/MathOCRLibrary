@@ -6,6 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.xls
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -22,6 +23,14 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+# UnitTest result
+.pytest_cache/
+pytest_cache/
+pytest-logs.txt
+
+# Training data
+TrainingData/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -36,16 +45,12 @@ bld/
 [Rr]eleasePS/
 dlldata.c
 
-
 # Visual Studio profiler
 *.psess
 *.vsp
 *.vspx
 *.sap
 
-
-
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/MathOCRLibrary/DataGenerator/TrainingData
