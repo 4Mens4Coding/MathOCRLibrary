@@ -7,7 +7,7 @@ class ImageController:
         Inf: Valentinas                                 6/9/2018 """
     def __init__ (self, threshold = 255):
         self.__imageList = Queue ()
-        self.__binaryArrayList = []
+        self.__processedImagesList = []
         self.threshold = threshold
 
 
@@ -28,54 +28,83 @@ class ImageController:
     def firstToBinaryArray (self):
         """ Convert to binary matrix first stored image """
         image = self.__imageList.get ()
-        self.__binaryArrayList.append (self.__toBinaryArray (image))
+        self.__processedImagesList.append (self.__toBinaryArray (image))
 
 
     def allToBinaryArray (self):
         """ Convert to binary matrix all stored images """
         while not self.__imageList.empty ():
             image = self.__imageList.get ()
-            self.__binaryArrayList.append (self.__toBinaryArray (image))
+            self.__processedImagesList.append (self.__toBinaryArray (image))
 
 
     def __toBinaryArray (self, image):
         """ Private method to convert image to binary array """
         # Downscale an image (get R, G, B tuple)
         # Good for small pictures, but really bad for big one.
-        image = image.resize ((100, int (image.size[1] * 100 / image.size[0])))
+        #image = image.resize ((100, int (image.size[1] * 100 /
+        #image.size[0])))
+        image = image.resize ((28, 28))
         pixels = image.getdata ()
         # Get binary list based on threshold
-        binary = list (map (lambda color: int (sum (color) > self.threshold * 3 // 2), pixels))
+        binary = list (map (lambda color: int (sum (color) < self.threshold * 3 // 2), pixels))
         array2d = [binary[i * image.size[0]: (i + 1) * image.size[0]] for i in range (image.size[1])]
         return array2d
 
     
-    def getAllBinaryArrays (self):
-        """ Return all stored binary arrays """
-        return self.__binaryArrayList
+    def getProcessedImagesList (self):
+        """ Return all stored processed image arrays """
+        return self.__processedImagesList
 
     
-    def getBinaryArray (self, index):
-        """ Return binary array in selected location (index) """
-        if ((index <= len (self.__binaryArrayList)) & (index > -1)):
-            return self.__binaryArrayList[index]
+    def getProcessedImage (self, index):
+        """ Return processed image matrix in selected location (index) """
+        if ((index <= len (self.__processedImagesList)) & (index > -1)):
+            return self.__processedImagesList[index]
 
 
-    def cleanBinaryArrayList (self):
-        """ Remove all stored binary arrays from the list """
-        del self.__binaryArrayList[:]
+    def cleanProcessedImagesList (self):
+        """ Remove all stored processed image arrays from the list """
+        del self.__processedImagesList[:]
 
 
-    def printAllBinaryArraysAsMatrix (self):
-        """ Print all binary arrays in the list with matrix shape """
-        for binArr in self.__binaryArrayList:
-            print (self.getBinaryArrayAsMatrix (binArr))
+    def printProcessedImagesListAsMatrix (self):
+        """ Print all processed images in the list with matrix shape """
+        for binArr in self.__processedImagesList:
+            print (self.getProcessedImagesListAsMatrix (binArr))
             print ("-----------------------------------")
 
 
-    def getBinaryArrayAsMatrix (self, BinaryArray):
-        """ return one selected binary array with matrix shape """
-        return "\n".join ("".join (map (str, line)) for line in BinaryArray)
+    def getProcessedImagesListAsMatrix (self, ProcessedImageArray):
+        """ return one selected processed image array with matrix shape """
+        return "\n".join (''.join ('{:5}'.format (value) for value in row) for row in ProcessedImageArray)
+
+
+    def firstToPixelMatrix (self):
+        """ Convert first stored image to pixel matrix with values from 0 to 1 """
+        image = self.__imageList.get ()
+        self.__processedImagesList.append (self.__toPixelMatrix (image))
+
+    def allToPixelMatrix (self):
+        """ Convert all stored images to pixel matrix with values from 0 to 1 """
+        while not self.__imageList.empty ():
+            image = self.__imageList.get ()
+            self.__processedImagesList.append (self.__toPixelMatrix (image))
+
+
+    def __toPixelMatrix (self, image):
+        """ Private method to convert image to pixel matrix with values from 0 to 1 """
+        width, height = image.size
+        
+        #width, height = 28, 28
+        #image = image.resize ((width, height))
+        
+        pixels = list (image.getdata ())
+        data = []
+        for pixel in pixels:
+            grays = pixel[0] * 299 / 1000 + pixel[1] * 587 / 1000 + pixel[2] * 114 / 1000
+            data.append ("{0:.2f}".format (-grays / 255 + 1))
+        return [data[offset:offset + width] for offset in range (0, width * height, width)]
 
 
     def countOfImagesInQueue (self):
@@ -83,12 +112,12 @@ class ImageController:
         return self.__imageList.qsize ()
 
 
-    def countOfBinarizedImages (self):
-        """ Number of binarized pictures """
-        return len (self.__binaryArrayList)
+    def countOfProcessedImages (self):
+        """ Number of processed pictures """
+        return len (self.__processedImagesList)
 
 
     def __str__ (self):
         """ Print information about image controller """
-        return """ - Images: {0}\n - ConvertedToBinaryArray: {1}\n - Pending: {2}\n - Threshold: {3}\n""".format (self.__imageList.qsize (), 
-            len (self.__binaryArrayList), self.__imageList.qsize () - len (self.__binaryArrayList), self.threshold)
+        return """ - Images: {0}\n - ProcessedImages: {1}\n - Pending: {2}\n - Threshold: {3}\n""".format (self.__imageList.qsize (), 
+            len (self.__processedImagesList), self.__imageList.qsize () - len (self.__processedImagesList), self.threshold)

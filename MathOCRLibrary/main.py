@@ -8,13 +8,12 @@ def main ():
     """ Des: This is our main program
         Inf: Author                        last_modification_time """
     ImController = ImageController (400)
-    trainingDataLocation = iglob ("*/TrainingData/test/*.jpg")
+    trainingDataLocation = iglob ("*/TrainingData/test/*.png")
     for imagePath in trainingDataLocation:
         ImController.appendImageFromPath (imagePath)
-    ImController.allToBinaryArray ()
-    ImController.getAllBinaryArrays
-    ImController.printAllBinaryArraysAsMatrix ()
-    ImController.cleanBinaryArrayList ()
+    ImController.allToPixelMatrix ()
+    ImController.printProcessedImagesListAsMatrix ()
+    ImController.cleanProcessedImagesList ()
 
 if __name__ == "__main__":
     main ()
