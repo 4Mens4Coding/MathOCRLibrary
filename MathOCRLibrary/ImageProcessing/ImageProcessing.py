@@ -42,13 +42,12 @@ class ImageController:
         """ Private method to convert image to binary array """
         # Downscale an image (get R, G, B tuple)
         # Good for small pictures, but really bad for big one.
-        #image = image.resize ((100, int (image.size[1] * 100 /
-        #image.size[0])))
-        image = image.resize ((28, 28))
+        image = image.resize ((100, int (image.size[1] * 100 / image.size[0])))
+        width, height = image.size
         pixels = image.getdata ()
         # Get binary list based on threshold
         binary = list (map (lambda color: int (sum (color) < self.threshold * 3 // 2), pixels))
-        array2d = [binary[i * image.size[0]: (i + 1) * image.size[0]] for i in range (image.size[1])]
+        array2d = [binary[i * width: (i + 1) * width] for i in range (height)]
         return array2d
 
     
@@ -94,11 +93,8 @@ class ImageController:
 
     def __toPixelMatrix (self, image):
         """ Private method to convert image to pixel matrix with values from 0 to 1 """
+        image = image.resize ((100, int (image.size[1] * 100 / image.size[0])))
         width, height = image.size
-        
-        #width, height = 28, 28
-        #image = image.resize ((width, height))
-        
         pixels = list (image.getdata ())
         data = []
         for pixel in pixels:

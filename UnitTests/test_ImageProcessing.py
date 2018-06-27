@@ -25,60 +25,72 @@ class TestClass_ImageProcessing:
 
     def test_firstToBinaryArray (self,):
         countImg = imContr.countOfImagesInQueue ()
-        countBin = imContr.countOfBinarizedImages ()
+        countBin = imContr.countOfProcessedImages ()
         imContr.firstToBinaryArray ()
         assert imContr.countOfImagesInQueue () == countImg - 1
-        assert imContr.countOfBinarizedImages () == countBin + 1
+        assert imContr.countOfProcessedImages () == countBin + 1
 
 
     def test_allToBinaryArray (self):
         for i in range (3):
             imContr.appendImageFromPath (imageDataPath)
         countImg = imContr.countOfImagesInQueue ()
-        countBin = imContr.countOfBinarizedImages ()
+        countBin = imContr.countOfProcessedImages ()
         imContr.allToBinaryArray ()
         assert imContr.countOfImagesInQueue () == 0
-        assert imContr.countOfBinarizedImages () == countBin + countImg
-
-
-    def test_printImageController (self):
-        try:
-            print (imContr)
-        except:
-            raise format_exc ()
-
-
-    def test_printAllBinaryArraysAsMatrix (self):
-        try:
-            imContr.printAllBinaryArraysAsMatrix ()
-        except:
-            raise format_exc ()
+        assert imContr.countOfProcessedImages () == countBin + countImg
 
 
     def test_getBinaryArray_outOfRange (self):
-        assert imContr.getBinaryArray (500) == None
+        assert imContr.getProcessedImage (500) == None
 
 
     def test_getBinaryArray_outOfRange (self):
-        assert imContr.getBinaryArray (-5) == None
+        assert imContr.getProcessedImage (-5) == None
 
 
-    def test_allToBinaryArray (self):
+    def test_firstToPixelMatrix (self,):
+        countImg = imContr.countOfImagesInQueue ()
+        countBin = imContr.countOfProcessedImages ()
+        imContr.firstToPixelMatrix ()
+        assert imContr.countOfImagesInQueue () == countImg - 1
+        assert imContr.countOfProcessedImages () == countBin + 1
+
+
+    def test_allToPixelMatrix (self):
+        for i in range (3):
+            imContr.appendImageFromPath (imageDataPath)
+        countImg = imContr.countOfImagesInQueue ()
+        countBin = imContr.countOfProcessedImages ()
+        imContr.allToPixelMatrix ()
+        assert imContr.countOfImagesInQueue () == 0
+        assert imContr.countOfProcessedImages () == countBin + countImg
+
+
+    def test_getProcessedImage_withBinaryArray (self):
         IC2 = IC ()
         for i in range (2):
             IC2.appendImageFromPath (imageDataPath)
         IC2.allToBinaryArray ()
-        assert IC2.getBinaryArray (0) == IC2.getBinaryArray (1)
+        assert IC2.getProcessedImage (0) == IC2.getProcessedImage (1)
 
 
-    def test_getBinaryArrayAsMatrix (self):
+    def test_allToPixelMatrix_withPixelMatrix (self):
+        IC2 = IC ()
+        for i in range (2):
+            IC2.appendImageFromPath (imageDataPath)
+        IC2.allToPixelMatrix ()
+        assert IC2.getProcessedImage (0) == IC2.getProcessedImage (1)
+
+
+    def test_getBinaryArrayAsMatrix_withBinaryArray (self):
         pass
 
 
-    def test_getBinaryArrayAsMatrix (self):
+    def test_getBinaryArrayAsMatrix_withPixelMatrix (self):
         pass
 
 
-    def test_cleanBinaryArrayList (self):
-        imContr.cleanBinaryArrayList ()
-        assert imContr.countOfBinarizedImages () == 0
+    def test_cleanProcessedImagesList (self):
+        imContr.cleanProcessedImagesList ()
+        assert imContr.countOfProcessedImages () == 0
